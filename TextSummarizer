@@ -1,0 +1,24 @@
+import openai
+
+openai.api_key = "your-openai-api-key"  # Replace with your key
+
+# Sample paragraph to summarize
+text = """
+Artificial Intelligence is rapidly transforming every industry, from healthcare to finance. 
+With the rise of large language models like GPT, businesses can automate customer support, 
+generate content, and derive insights from massive text datasets. The pace of change is accelerating.
+"""
+
+# Make API call to GPT-3.5
+response = openai.ChatCompletion.create(
+    model="gpt-3.5-turbo",
+    messages=[
+        {"role": "system", "content": "You are a helpful assistant that summarizes text."},
+        {"role": "user", "content": f"Summarize the following:\n{text}"}
+    ],
+    temperature=0.5
+)
+
+# Output result
+summary = response['choices'][0]['message']['content']
+print("📌 Summary:\n", summary)
